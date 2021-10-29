@@ -3,3 +3,5 @@
     <button onclick="window.location.hash = '#input'">ホーム</button>
   </div>
   <h2 id="input">入力</h2>
+
+# name属性に同じ名前をつけることで片方しか選択できないようにできる(ラジオボタン)
