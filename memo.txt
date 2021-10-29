@@ -1,0 +1,2 @@
+# window.location.hashで指定のidに遷移できる
+ <button onclick="window.location.hash = '#home'">ホーム</button>
