@@ -10,20 +10,19 @@ const disableSelectBox = (disabled) => {
 // =の左側の.disabledはセレクトボックスの有効無効を切り替えるための設定項目、右は引数
 
 
-//収支入力フォームの内容チェックする関数
-const inputCheck = () => {
-   //チェック結果 true:入力チェックOK　false:未記入アリ
-  let result = true
+//収支入力フォームの内容チェック
+function inputCheck() {
+  //チェック結果 true:入力チェックOK　false:未記入アリ
+  let result = true;
 
+  //選択した収支のラジオボタンの取得
   let radio = document.getElementsByName("balance");
-  // name属性を取得
   let balance;
-
   for (let i = 0; i < radio.length; i++) {
-    if (radio[i].checked == true) {
-        balance = radio[i].value;
-        break;
-    }
+      if (radio[i].checked == true) {
+          balance = radio[i].value;
+          break;
+      }
   }
 
   //日付、カテゴリ、金額、メモの取得
@@ -45,6 +44,7 @@ const inputCheck = () => {
     result = false;
     alert("メモが未記入です");
   }
+  return result;
 }
 
 

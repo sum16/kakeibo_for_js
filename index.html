@@ -36,8 +36,8 @@
         <section id="inputSection">
             <div>
                 <label>収支</label>
-                <input type="radio" name="balance" value="支出" onclick="disableSelectBox(false);" checked>支出
-                <input type="radio" name="balance" value="収入" onclick="disableSelectBox(true);">収入
+                <input name="balance" type="radio" value="支出" onclick="disableSelectBox(false);" checked>支出
+                <input name="balance" type="radio" value="収入" onclick="disableSelectBox(true);">収入
                 <label>日付</label>
                 <input type="date" id="date">
                 <label>カテゴリ</label>
@@ -70,7 +70,9 @@
         <!-- 入出金一覧 -->
         <h2 id="inOutList">入出金一覧</h2>
         <section id="list">
-            <!-- ここに入出金一覧を表示します。 -->
+            <script>
+                createList();
+            </script>
         </section>
 
         <!-- グラフ -->
