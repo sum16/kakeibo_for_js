@@ -141,7 +141,7 @@ function createList () {
 
       //入出金のデータを表示
       rows.forEach(element => {
-        console.log(element);
+        // console.log(element);
         table += `
         <tr>
           <td>${element.date}</td>
@@ -149,7 +149,7 @@ function createList () {
           <td>${element.category}</td>
           <td>${element.amount}</td>
           <td>${element.memo}</td>
-          <td><button>x</button></td>
+          <td><button onclick="deleteData('${element.id}')">x</button></td>
         </tr>
         `;
       });
@@ -163,5 +163,39 @@ function createList () {
     }
   }
 }
-
 // 複数行にわたる文字列を代入するときにヒアドキュメントを使う
+
+//データの削除
+function deleteData(id) {
+  //データベースを開く
+  let database = indexedDB.open(dbName, dbVersion);
+  database.onupgradeneeded = function (event) {
+      let db = event.target.result;
+  }
+  //開いたら削除実行
+  database.onsuccess = function (event) {
+      let db = event.target.result;
+      let transaction = db.transaction(storeName, "readwrite");
+      transaction.oncomplete = function (event) {
+          console.log("トランザクション完了");
+      }
+      transaction.onerror = function (event) {
+          console.log("トランザクションエラー");
+      }
+      let store = transaction.objectStore(storeName);
+
+      let deleteData = store.delete(id);
+        deleteData.onsuccess = function (event) {
+            console.log("削除成功");
+            createList();
+        }
+        deleteData.onerror = function (event) {
+            console.log("削除失敗");
+        }
+        db.close();
+  }
+  //データベースの開けなかった時の処理
+  database.onerror = function (event) {
+      console.log("データベースに接続できませんでした");
+  }
+}

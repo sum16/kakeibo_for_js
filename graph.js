@@ -26,8 +26,12 @@ function createPieChart(rows) {
    //円グラフ用にカテゴリと合計金額を配列に入れる
   let keyArray = [];
   let valueArray = [];
+  // オブジェクトからキーを取り出し、各配列に格納
   for (key in pieChartData) {
+  
+  // キーを格納
   keyArray.push(key);
+  // バリューを格納
   valueArray.push(pieChartData[key])
   }
 
