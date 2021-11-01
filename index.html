@@ -18,6 +18,7 @@
 
     <!--フォーム入力チェックのJavaScript読み込み-->
     <script src="inputCheck.js"></script>
+    <script src="sample.js"></script>
 </head>
 
 <body>
@@ -66,6 +67,9 @@
         <div class="submit">
             <button onclick="regist();">登録する</button>
         </div>
+        <div>
+            <button id="hoge-btn">テスト</button>
+        </div>
 
         <!-- 入出金一覧 -->
         <h2 id="inOutList">入出金一覧</h2>
@@ -79,7 +83,8 @@
         <h2 id="graph">グラフ</h2>
         <!-- <hr> -->
         <section>
-            <!-- ここにグラフを表示します。 -->
+            <!-- Chart.jsのグラフはcanvasタグを利用 -->
+            <canvas id="pieChart"></canvas>
         </section>
 
     </article>

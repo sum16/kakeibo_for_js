@@ -108,3 +108,60 @@ function regist() {
   createList();
 }
 
+// 以下のタイミングで実行
+// 家計簿アプリ（index.html）をブラウザで開いたとき
+// 入出金のデータを入力したとき
+// データを削除したとき
+function createList () {
+  //データベースからデータを全件取得
+  let database = indexedDB.open(dbName);
+  database.onsuccess = function (event) {
+    let db = event.target.result;
+    let transaction = db.transaction(storeName, "readonly");
+    let store = transaction.objectStore(storeName);
+    // getAll()で全権取得し、rowsに格納
+    store.getAll().onsuccess = function (data) {
+      console.log(data);
+      let rows = data.target.result;
+
+      let section = document.getElementById("list");
+      //入出金一覧のテーブルを作る
+      let table = `
+          <table>
+              <tr>
+                  <th>日付</th>
+                  <th>収支</th>
+                  <th>カテゴリ</th>
+                  <th>金額</th>
+                  <th>メモ</th>
+                  <th>削除
+              </th>
+          </tr>
+      `;
+
+      //入出金のデータを表示
+      rows.forEach(element => {
+        console.log(element);
+        table += `
+        <tr>
+          <td>${element.date}</td>
+          <td>${element.balance}</td>
+          <td>${element.category}</td>
+          <td>${element.amount}</td>
+          <td>${element.memo}</td>
+          <td><button>x</button></td>
+        </tr>
+        `;
+      });
+      table += '</table>';
+      // tableの閉じタグを追加
+      section.innerHTML = table;
+      // sectionタグに格納
+
+      // 円グラフの作成
+      createPieChart(rows);
+    }
+  }
+}
+
+// 複数行にわたる文字列を代入するときにヒアドキュメントを使う
